@@ -80,7 +80,7 @@ export default function Sliders({
             value={brokersFeeInput}
             onChange={handleBrokersFeeChange}
             onBlur={handleBrokersFeeBlur}
-            className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)] border border-[#56585e] cursor-text focus:outline-none"
+            className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)] border border-[#56585e]/50 border-[0.5px] cursor-text focus:outline-none focus:ring-0 focus:ring-offset-0"
           />
         </div>
         <Slider
@@ -108,7 +108,7 @@ export default function Sliders({
             value={attorneyFeeInput}
             onChange={handleAttorneyFeeChange}
             onBlur={handleAttorneyFeeBlur}
-            className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)] border border-[#56585e] cursor-text focus:outline-none"
+            className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)] border border-[#56585e]/50 border-[0.5px] cursor-text focus:outline-none focus:ring-0 focus:ring-offset-0"
           />
         </div>
         <Slider
@@ -137,7 +137,7 @@ export default function Sliders({
               value={flipTaxInput}
               onChange={handleFlipTaxChange}
               onBlur={handleFlipTaxBlur}
-              className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)] border border-[#56585e] cursor-text focus:outline-none"
+              className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)] border border-[#56585e]/50 border-[0.5px] cursor-text focus:outline-none focus:ring-0 focus:ring-offset-0"
             />
           </div>
           <Slider
