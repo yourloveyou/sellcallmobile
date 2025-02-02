@@ -32,9 +32,10 @@ export default function Calculator() {
   });
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value.replace(/[^0-9]/g, ""));
-    if (!isNaN(value) && value >= 150000 && value <= 4000000) {
-      setSalePrice(value);
+    const rawValue = e.target.value.replace(/[^0-9]/g, "");
+    const value = parseInt(rawValue);
+    if (!isNaN(value)) {
+      setSalePrice(Math.min(Math.max(value, 150000), 4000000));
     }
   };
 
@@ -47,10 +48,9 @@ export default function Calculator() {
             <Input
               type="text"
               inputMode="numeric"
-              pattern="[0-9]*"
               value={`$${salePrice.toLocaleString()}`}
               onChange={handlePriceChange}
-              className="text-lg font-hanuman bg-[rgba(255,255,255,0.1)] focus:bg-[rgba(255,255,255,0.15)] border-none"
+              className="text-lg font-hanuman bg-[rgba(255,255,255,0.1)] focus:bg-[rgba(255,255,255,0.15)] border border-[#56585e] cursor-text"
             />
             <input
               type="range"

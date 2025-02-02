@@ -48,6 +48,7 @@ export default function Results({ fees, propertyType, existingMortgage }: Result
   return (
     <div className="bg-[#2b2b2b] rounded-lg p-6 text-white font-hanuman">
       <div className="text-3xl font-bold mb-6">
+        <div className="text-gray-300 text-lg mb-2">Total Cost</div>
         <AnimatedValue value={fees.totalCost} />
       </div>
 
