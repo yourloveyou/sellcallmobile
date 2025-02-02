@@ -1,50 +1,124 @@
 import { Button } from "@/components/ui/button";
 import { CalculatedFees } from "@/lib/calculator";
+import { useEffect, useRef, useState } from "react";
 
 interface ResultsProps {
   fees: CalculatedFees;
+  propertyType: string;
+  existingMortgage: boolean;
 }
 
-export default function Results({ fees }: ResultsProps) {
+function AnimatedValue({ value }: { value: number }) {
+  const [displayValue, setDisplayValue] = useState(value);
+  const previousValue = useRef(value);
+
+  useEffect(() => {
+    const steps = 20;
+    const increment = (value - previousValue.current) / steps;
+    let currentStep = 0;
+
+    const interval = setInterval(() => {
+      if (currentStep < steps) {
+        setDisplayValue(prev => prev + increment);
+        currentStep++;
+      } else {
+        setDisplayValue(value);
+        clearInterval(interval);
+      }
+    }, 50);
+
+    previousValue.current = value;
+    return () => clearInterval(interval);
+  }, [value]);
+
+  return <span>${Math.round(displayValue).toLocaleString()}</span>;
+}
+
+export default function Results({ fees, propertyType, existingMortgage }: ResultsProps) {
+  const isCoopOrCondo = propertyType === "Co-op" || propertyType === "Condo";
+
   return (
-    <div className="bg-zinc-900 rounded-lg p-6 text-white">
+    <div className="bg-zinc-900 rounded-lg p-6 text-white font-hanuman">
       <h2 className="text-2xl font-semibold mb-4">Total Cost</h2>
       <div className="text-3xl font-bold mb-6">
-        ${fees.totalCost.toLocaleString()}
+        <AnimatedValue value={fees.totalCost} />
       </div>
 
       <div className="space-y-4">
         <div className="flex justify-between">
           <span className="text-gray-300">Brokers Fee</span>
-          <span>${fees.brokersFee.toLocaleString()}</span>
+          <AnimatedValue value={fees.brokersFee} />
         </div>
         <div className="flex justify-between">
           <span className="text-gray-300">Attorney Fee</span>
-          <span>${fees.attorneyFee.toLocaleString()}</span>
+          <AnimatedValue value={fees.attorneyFee} />
         </div>
         <div className="flex justify-between">
           <span className="text-gray-300">NYC Transfer Tax</span>
-          <span>${fees.nycTransferTax.toLocaleString()}</span>
+          <AnimatedValue value={fees.nycTransferTax} />
         </div>
         <div className="flex justify-between">
           <span className="text-gray-300">NYS Transfer Tax</span>
-          <span>${fees.nysTransferTax.toLocaleString()}</span>
+          <AnimatedValue value={fees.nysTransferTax} />
         </div>
-        <div className="border-t border-gray-700 pt-4">
-          <div className="flex justify-between">
-            <span className="text-gray-300">Payoff Recording Fee</span>
-            <span>${fees.payoffRecordingFee.toLocaleString()}</span>
+
+        {propertyType === "Co-op" && (
+          <>
+            {fees.flipTax !== undefined && (
+              <div className="flex justify-between">
+                <span className="text-gray-300">Building Flip Tax</span>
+                <AnimatedValue value={fees.flipTax} />
+              </div>
+            )}
+            {fees.coopTransferTaxFiling !== undefined && (
+              <div className="flex justify-between">
+                <span className="text-gray-300">Co-op Transfer Tax Filing Fee</span>
+                <AnimatedValue value={fees.coopTransferTaxFiling} />
+              </div>
+            )}
+            {fees.coopStockTransferTax !== undefined && (
+              <div className="flex justify-between">
+                <span className="text-gray-300">Co-op Stock Transfer Tax</span>
+                <AnimatedValue value={fees.coopStockTransferTax} />
+              </div>
+            )}
+          </>
+        )}
+
+        {isCoopOrCondo && (
+          <>
+            {fees.managingAgentFee !== undefined && (
+              <div className="flex justify-between">
+                <span className="text-gray-300">Managing Agent Fee</span>
+                <AnimatedValue value={fees.managingAgentFee} />
+              </div>
+            )}
+            {fees.moveOutFee !== undefined && (
+              <div className="flex justify-between">
+                <span className="text-gray-300">Move Out Fee</span>
+                <AnimatedValue value={fees.moveOutFee} />
+              </div>
+            )}
+          </>
+        )}
+
+        {existingMortgage && (
+          <div className="border-t border-gray-700 pt-4">
+            <div className="flex justify-between">
+              <span className="text-gray-300">Payoff Recording Fee</span>
+              <AnimatedValue value={fees.payoffRecordingFee} />
+            </div>
+            <div className="flex justify-between mt-2">
+              <span className="text-gray-300">Bank Satisfaction Fee</span>
+              <AnimatedValue value={fees.bankSatisfactionFee} />
+            </div>
           </div>
-          <div className="flex justify-between mt-2">
-            <span className="text-gray-300">Bank Satisfaction Fee</span>
-            <span>${fees.bankSatisfactionFee.toLocaleString()}</span>
-          </div>
-        </div>
+        )}
 
         <div className="border-t border-gray-700 pt-4">
           <div className="flex justify-between text-xl font-semibold">
             <span>Net Proceed</span>
-            <span>${fees.netProceed.toLocaleString()}</span>
+            <AnimatedValue value={fees.netProceed} />
           </div>
         </div>
 

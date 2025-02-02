@@ -20,16 +20,20 @@ export default function Calculator() {
   const [existingMortgage, setExistingMortgage] = useState(true);
   const [brokersFee, setBrokersFee] = useState(4);
   const [attorneyFee, setAttorneyFee] = useState(1500);
+  const [flipTax, setFlipTax] = useState(0);
 
   const fees = calculateFees({
     salePrice,
     brokersFee,
     attorneyFee,
+    propertyType,
+    existingMortgage,
+    flipTax,
   });
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value.replace(/[^0-9]/g, ""));
-    if (value >= 150000 && value <= 4000000) {
+    if (!isNaN(value) && value >= 150000 && value <= 4000000) {
       setSalePrice(value);
     }
   };
@@ -44,7 +48,7 @@ export default function Calculator() {
               type="text"
               value={`$${salePrice.toLocaleString()}`}
               onChange={handlePriceChange}
-              className="text-lg"
+              className="text-lg font-hanuman"
             />
             <input
               type="range"
@@ -64,8 +68,10 @@ export default function Calculator() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="1-3 Family">1-3 Family</SelectItem>
+                <SelectItem value="4 Family+">4 Family+</SelectItem>
                 <SelectItem value="Condo">Condo</SelectItem>
                 <SelectItem value="Co-op">Co-op</SelectItem>
+                <SelectItem value="Commercial">Commercial</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -81,12 +87,18 @@ export default function Calculator() {
           <Sliders
             brokersFee={brokersFee}
             attorneyFee={attorneyFee}
+            flipTax={propertyType === "Co-op" ? flipTax : undefined}
             onBrokersFeeChange={setBrokersFee}
             onAttorneyFeeChange={setAttorneyFee}
+            onFlipTaxChange={setFlipTax}
           />
         </div>
 
-        <Results fees={fees} />
+        <Results 
+          fees={fees} 
+          propertyType={propertyType} 
+          existingMortgage={existingMortgage} 
+        />
       </CardContent>
     </Card>
   );
