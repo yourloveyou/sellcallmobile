@@ -59,7 +59,7 @@ export default function Calculator() {
               value={salePriceInput}
               onChange={handlePriceChange}
               onBlur={handlePriceBlur}
-              className="text-lg font-hanuman bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)] border border-[#56585e]/50 border-[0.5px] cursor-text focus:outline-none focus:ring-0 focus:ring-offset-0"
+              className="text-lg font-hanuman bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)] border border-[#56585e]/50 border-[0.5px] focus:border-0 cursor-text focus:outline-none focus:ring-0 focus:ring-offset-0"
             />
             <input
               type="range"
@@ -78,7 +78,7 @@ export default function Calculator() {
           <div className="space-y-2">
             <Label>Property Type</Label>
             <Select value={propertyType} onValueChange={setPropertyType}>
-              <SelectTrigger className="bg-[rgba(255,255,255,0.05)] border-[#56585e] focus:outline-none">
+              <SelectTrigger className="bg-[rgba(255,255,255,0.05)] border-[#56585e]/50 focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-0">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
