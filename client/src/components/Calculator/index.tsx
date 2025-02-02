@@ -16,6 +16,7 @@ import { calculateFees } from "@/lib/calculator";
 
 export default function Calculator() {
   const [salePrice, setSalePrice] = useState(600000);
+  const [salePriceInput, setSalePriceInput] = useState(`$${salePrice.toLocaleString()}`);
   const [propertyType, setPropertyType] = useState("1-3 Family");
   const [existingMortgage, setExistingMortgage] = useState(true);
   const [brokersFee, setBrokersFee] = useState(4);
@@ -32,15 +33,18 @@ export default function Calculator() {
   });
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const rawValue = e.target.value.replace(/[$,]/g, "");
-    if (rawValue === "") {
-      setSalePrice(150000);
-    } else {
-      const value = parseInt(rawValue);
-      if (!isNaN(value)) {
-        setSalePrice(Math.min(Math.max(value, 150000), 4000000));
-      }
+    const input = e.target.value;
+    setSalePriceInput(input);
+
+    const numericValue = parseInt(input.replace(/[^0-9]/g, ""));
+    if (!isNaN(numericValue)) {
+      const clampedValue = Math.min(Math.max(numericValue, 150000), 4000000);
+      setSalePrice(clampedValue);
     }
+  };
+
+  const handlePriceBlur = () => {
+    setSalePriceInput(`$${salePrice.toLocaleString()}`);
   };
 
   return (
@@ -52,8 +56,9 @@ export default function Calculator() {
             <Input
               type="text"
               inputMode="numeric"
-              value={`$${salePrice.toLocaleString()}`}
+              value={salePriceInput}
               onChange={handlePriceChange}
+              onBlur={handlePriceBlur}
               className="text-lg font-hanuman bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)] border border-[#56585e] cursor-text focus:outline-none"
             />
             <input
@@ -61,7 +66,11 @@ export default function Calculator() {
               min={150000}
               max={4000000}
               value={salePrice}
-              onChange={(e) => setSalePrice(parseInt(e.target.value))}
+              onChange={(e) => {
+                const value = parseInt(e.target.value);
+                setSalePrice(value);
+                setSalePriceInput(`$${value.toLocaleString()}`);
+              }}
               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
             />
           </div>
