@@ -32,15 +32,19 @@ export default function Calculator() {
   });
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const rawValue = e.target.value.replace(/[^0-9]/g, "");
-    const value = parseInt(rawValue);
-    if (!isNaN(value)) {
-      setSalePrice(Math.min(Math.max(value, 150000), 4000000));
+    const rawValue = e.target.value.replace(/[$,]/g, "");
+    if (rawValue === "") {
+      setSalePrice(150000);
+    } else {
+      const value = parseInt(rawValue);
+      if (!isNaN(value)) {
+        setSalePrice(Math.min(Math.max(value, 150000), 4000000));
+      }
     }
   };
 
   return (
-    <Card className="w-full max-w-3xl bg-[rgba(17,17,17,0.05)]">
+    <Card className="w-full max-w-3xl bg-[rgba(17,17,17,0.05)] rounded-xl">
       <CardContent className="grid md:grid-cols-2 gap-6 p-6">
         <div className="space-y-6">
           <div className="space-y-2">
@@ -50,7 +54,7 @@ export default function Calculator() {
               inputMode="numeric"
               value={`$${salePrice.toLocaleString()}`}
               onChange={handlePriceChange}
-              className="text-lg font-hanuman bg-[rgba(255,255,255,0.1)] focus:bg-[rgba(255,255,255,0.15)] border border-[#56585e] cursor-text"
+              className="text-lg font-hanuman bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)] border border-[#56585e] cursor-text focus:outline-none"
             />
             <input
               type="range"
@@ -65,7 +69,7 @@ export default function Calculator() {
           <div className="space-y-2">
             <Label>Property Type</Label>
             <Select value={propertyType} onValueChange={setPropertyType}>
-              <SelectTrigger>
+              <SelectTrigger className="bg-[rgba(255,255,255,0.05)] border-[#56585e] focus:outline-none">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>

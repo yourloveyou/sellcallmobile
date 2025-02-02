@@ -20,27 +20,39 @@ export default function Sliders({
   onFlipTaxChange,
 }: SlidersProps) {
   const handleBrokersFeeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const rawValue = e.target.value.replace(/[^0-9.]/g, "");
-    const value = parseFloat(rawValue);
-    if (!isNaN(value)) {
-      onBrokersFeeChange(Math.min(Math.max(value, 0), 6));
+    const rawValue = e.target.value.replace(/[%]/g, "");
+    if (rawValue === "") {
+      onBrokersFeeChange(0);
+    } else {
+      const value = parseFloat(rawValue);
+      if (!isNaN(value)) {
+        onBrokersFeeChange(Math.min(Math.max(value, 0), 6));
+      }
     }
   };
 
   const handleAttorneyFeeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const rawValue = e.target.value.replace(/[^0-9]/g, "");
-    const value = parseInt(rawValue);
-    if (!isNaN(value)) {
-      onAttorneyFeeChange(Math.min(Math.max(value, 500), 5000));
+    const rawValue = e.target.value.replace(/[$,]/g, "");
+    if (rawValue === "") {
+      onAttorneyFeeChange(500);
+    } else {
+      const value = parseInt(rawValue);
+      if (!isNaN(value)) {
+        onAttorneyFeeChange(Math.min(Math.max(value, 500), 5000));
+      }
     }
   };
 
   const handleFlipTaxInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!onFlipTaxChange) return;
-    const rawValue = e.target.value.replace(/[^0-9]/g, "");
-    const value = parseInt(rawValue);
-    if (!isNaN(value)) {
-      onFlipTaxChange(Math.min(Math.max(value, 0), 5000));
+    const rawValue = e.target.value.replace(/[$,]/g, "");
+    if (rawValue === "") {
+      onFlipTaxChange(0);
+    } else {
+      const value = parseInt(rawValue);
+      if (!isNaN(value)) {
+        onFlipTaxChange(Math.min(Math.max(value, 0), 5000));
+      }
     }
   };
 
@@ -53,7 +65,7 @@ export default function Sliders({
             type="text"
             value={`${brokersFee}%`}
             onChange={handleBrokersFeeInput}
-            className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.1)] focus:bg-[rgba(255,255,255,0.15)] border border-[#56585e] cursor-text"
+            className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)] border border-[#56585e] cursor-text focus:outline-none"
           />
         </div>
         <Slider
@@ -77,7 +89,7 @@ export default function Sliders({
             type="text"
             value={`$${attorneyFee.toLocaleString()}`}
             onChange={handleAttorneyFeeInput}
-            className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.1)] focus:bg-[rgba(255,255,255,0.15)] border border-[#56585e] cursor-text"
+            className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)] border border-[#56585e] cursor-text focus:outline-none"
           />
         </div>
         <Slider
@@ -102,7 +114,7 @@ export default function Sliders({
               type="text"
               value={`$${flipTax.toLocaleString()}`}
               onChange={handleFlipTaxInput}
-              className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.1)] focus:bg-[rgba(255,255,255,0.15)] border border-[#56585e] cursor-text"
+              className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)] border border-[#56585e] cursor-text focus:outline-none"
             />
           </div>
           <Slider
