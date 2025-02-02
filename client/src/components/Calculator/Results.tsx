@@ -34,36 +34,47 @@ function AnimatedValue({ value }: { value: number }) {
   return <span>${Math.round(displayValue).toLocaleString()}</span>;
 }
 
+function ResultGroup({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="result-group mt-4">
+      <h4 className="text-gray-300 border-b border-gray-700/50 pb-2 mb-3">{title}</h4>
+      <div className="space-y-2">{children}</div>
+    </div>
+  );
+}
+
 export default function Results({ fees, propertyType, existingMortgage }: ResultsProps) {
   const isCoopOrCondo = propertyType === "Co-op" || propertyType === "Condo";
 
   return (
-    <div className="bg-zinc-900 rounded-lg p-6 text-white font-hanuman">
+    <div className="bg-[#2b2b2b] rounded-lg p-6 text-white font-hanuman">
       <h2 className="text-2xl font-semibold mb-4">Total Cost</h2>
       <div className="text-3xl font-bold mb-6">
         <AnimatedValue value={fees.totalCost} />
       </div>
 
       <div className="space-y-4">
-        <div className="flex justify-between">
-          <span className="text-gray-300">Brokers Fee</span>
-          <AnimatedValue value={fees.brokersFee} />
-        </div>
-        <div className="flex justify-between">
-          <span className="text-gray-300">Attorney Fee</span>
-          <AnimatedValue value={fees.attorneyFee} />
-        </div>
-        <div className="flex justify-between">
-          <span className="text-gray-300">NYC Transfer Tax</span>
-          <AnimatedValue value={fees.nycTransferTax} />
-        </div>
-        <div className="flex justify-between">
-          <span className="text-gray-300">NYS Transfer Tax</span>
-          <AnimatedValue value={fees.nysTransferTax} />
-        </div>
+        <ResultGroup title="Standard Fees">
+          <div className="flex justify-between">
+            <span className="text-gray-300">Brokers Fee</span>
+            <AnimatedValue value={fees.brokersFee} />
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-300">Attorney Fee</span>
+            <AnimatedValue value={fees.attorneyFee} />
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-300">NYC Transfer Tax</span>
+            <AnimatedValue value={fees.nycTransferTax} />
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-300">NYS Transfer Tax</span>
+            <AnimatedValue value={fees.nysTransferTax} />
+          </div>
+        </ResultGroup>
 
         {propertyType === "Co-op" && (
-          <>
+          <ResultGroup title="Co-op Fees">
             {fees.flipTax !== undefined && (
               <div className="flex justify-between">
                 <span className="text-gray-300">Building Flip Tax</span>
@@ -82,11 +93,11 @@ export default function Results({ fees, propertyType, existingMortgage }: Result
                 <AnimatedValue value={fees.coopStockTransferTax} />
               </div>
             )}
-          </>
+          </ResultGroup>
         )}
 
         {isCoopOrCondo && (
-          <>
+          <ResultGroup title="Management & Move">
             {fees.managingAgentFee !== undefined && (
               <div className="flex justify-between">
                 <span className="text-gray-300">Managing Agent Fee</span>
@@ -99,20 +110,20 @@ export default function Results({ fees, propertyType, existingMortgage }: Result
                 <AnimatedValue value={fees.moveOutFee} />
               </div>
             )}
-          </>
+          </ResultGroup>
         )}
 
         {existingMortgage && (
-          <div className="border-t border-gray-700 pt-4">
+          <ResultGroup title="Mortgage Related">
             <div className="flex justify-between">
               <span className="text-gray-300">Payoff Recording Fee</span>
               <AnimatedValue value={fees.payoffRecordingFee} />
             </div>
-            <div className="flex justify-between mt-2">
+            <div className="flex justify-between">
               <span className="text-gray-300">Bank Satisfaction Fee</span>
               <AnimatedValue value={fees.bankSatisfactionFee} />
             </div>
-          </div>
+          </ResultGroup>
         )}
 
         <div className="border-t border-gray-700 pt-4">

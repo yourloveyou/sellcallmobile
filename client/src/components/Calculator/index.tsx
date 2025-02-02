@@ -39,16 +39,18 @@ export default function Calculator() {
   };
 
   return (
-    <Card className="w-full max-w-3xl">
+    <Card className="w-full max-w-3xl bg-[rgba(17,17,17,0.05)]">
       <CardContent className="grid md:grid-cols-2 gap-6 p-6">
         <div className="space-y-6">
           <div className="space-y-2">
             <Label>Sale Price</Label>
             <Input
               type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
               value={`$${salePrice.toLocaleString()}`}
               onChange={handlePriceChange}
-              className="text-lg font-hanuman"
+              className="text-lg font-hanuman pointer-events-auto cursor-text"
             />
             <input
               type="range"
