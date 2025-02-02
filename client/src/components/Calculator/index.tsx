@@ -50,7 +50,7 @@ export default function Calculator() {
               pattern="[0-9]*"
               value={`$${salePrice.toLocaleString()}`}
               onChange={handlePriceChange}
-              className="text-lg font-hanuman pointer-events-auto cursor-text"
+              className="text-lg font-hanuman bg-[rgba(255,255,255,0.1)] focus:bg-[rgba(255,255,255,0.15)] border-none"
             />
             <input
               type="range"

@@ -34,11 +34,10 @@ function AnimatedValue({ value }: { value: number }) {
   return <span>${Math.round(displayValue).toLocaleString()}</span>;
 }
 
-function ResultGroup({ title, children }: { title: string; children: React.ReactNode }) {
+function ResultGroup({ children }: { children: React.ReactNode }) {
   return (
     <div className="result-group mt-4">
-      <h4 className="text-gray-300 border-b border-gray-700/50 pb-2 mb-3">{title}</h4>
-      <div className="space-y-2">{children}</div>
+      <div className="space-y-2 border-t border-gray-600/70 pt-4">{children}</div>
     </div>
   );
 }
@@ -48,13 +47,12 @@ export default function Results({ fees, propertyType, existingMortgage }: Result
 
   return (
     <div className="bg-[#2b2b2b] rounded-lg p-6 text-white font-hanuman">
-      <h2 className="text-2xl font-semibold mb-4">Total Cost</h2>
       <div className="text-3xl font-bold mb-6">
         <AnimatedValue value={fees.totalCost} />
       </div>
 
       <div className="space-y-4">
-        <ResultGroup title="Standard Fees">
+        <div className="space-y-2">
           <div className="flex justify-between">
             <span className="text-gray-300">Brokers Fee</span>
             <AnimatedValue value={fees.brokersFee} />
@@ -71,10 +69,10 @@ export default function Results({ fees, propertyType, existingMortgage }: Result
             <span className="text-gray-300">NYS Transfer Tax</span>
             <AnimatedValue value={fees.nysTransferTax} />
           </div>
-        </ResultGroup>
+        </div>
 
         {propertyType === "Co-op" && (
-          <ResultGroup title="Co-op Fees">
+          <ResultGroup>
             {fees.flipTax !== undefined && (
               <div className="flex justify-between">
                 <span className="text-gray-300">Building Flip Tax</span>
@@ -97,7 +95,7 @@ export default function Results({ fees, propertyType, existingMortgage }: Result
         )}
 
         {isCoopOrCondo && (
-          <ResultGroup title="Management & Move">
+          <ResultGroup>
             {fees.managingAgentFee !== undefined && (
               <div className="flex justify-between">
                 <span className="text-gray-300">Managing Agent Fee</span>
@@ -114,7 +112,7 @@ export default function Results({ fees, propertyType, existingMortgage }: Result
         )}
 
         {existingMortgage && (
-          <ResultGroup title="Mortgage Related">
+          <ResultGroup>
             <div className="flex justify-between">
               <span className="text-gray-300">Payoff Recording Fee</span>
               <AnimatedValue value={fees.payoffRecordingFee} />
@@ -126,7 +124,7 @@ export default function Results({ fees, propertyType, existingMortgage }: Result
           </ResultGroup>
         )}
 
-        <div className="border-t border-gray-700 pt-4">
+        <div className="border-t border-gray-600/70 pt-4">
           <div className="flex justify-between text-xl font-semibold">
             <span>Net Proceed</span>
             <AnimatedValue value={fees.netProceed} />
@@ -134,7 +132,6 @@ export default function Results({ fees, propertyType, existingMortgage }: Result
         </div>
 
         <div className="mt-6">
-          <h3 className="text-lg font-semibold mb-2">Disclaimer</h3>
           <p className="text-sm text-gray-400">
             These Estimates are close to absolute accuracy but does not include
             prorated costs such as Utilities (water), unpaid taxes, fines and

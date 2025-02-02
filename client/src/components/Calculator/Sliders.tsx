@@ -50,7 +50,7 @@ export default function Sliders({
             type="text"
             value={`${brokersFee}%`}
             onChange={handleBrokersFeeInput}
-            className="w-24 text-right font-hanuman"
+            className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.1)] focus:bg-[rgba(255,255,255,0.15)] border-none"
           />
         </div>
         <Slider
@@ -74,7 +74,7 @@ export default function Sliders({
             type="text"
             value={`$${attorneyFee.toLocaleString()}`}
             onChange={handleAttorneyFeeInput}
-            className="w-24 text-right font-hanuman"
+            className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.1)] focus:bg-[rgba(255,255,255,0.15)] border-none"
           />
         </div>
         <Slider
@@ -99,7 +99,7 @@ export default function Sliders({
               type="text"
               value={`$${flipTax.toLocaleString()}`}
               onChange={handleFlipTaxInput}
-              className="w-24 text-right font-hanuman"
+              className="w-24 text-right font-hanuman bg-[rgba(255,255,255,0.1)] focus:bg-[rgba(255,255,255,0.15)] border-none"
             />
           </div>
           <Slider
