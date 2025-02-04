@@ -27,19 +27,17 @@ input[type="range"]::-moz-range-thumb {
   @apply w-4 h-4 bg-orange-500 border-none rounded-full cursor-pointer;
 }
 
-/* Add these at the top of your CSS file */
+/* Background and text styles */
 body, #root {
   background: transparent !important;
   margin: 0;
   padding: 0;
 }
 
-/* If you're using Tailwind, add this to remove any default backgrounds */
 .bg-background {
   background: transparent !important;
 }
 
-/* Add these styles */
 .text-card-foreground {
   color: white !important;
 }
@@ -49,7 +47,7 @@ body, #root {
 }
 
 /* Add the new background color */
-.bg-[rgba(17,17,17,0.05)] {
+.bg-\[rgba\(17\,17\,17\,0\.05\)\] {
   background-color: #1f1e1e61 !important;
 }
 
