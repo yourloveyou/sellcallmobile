@@ -7,18 +7,22 @@ import Home from "@/pages/Home";
 
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route component={NotFound} />
-    </Switch>
+    <div className="bg-transparent">
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route component={NotFound} />
+      </Switch>
+    </div>
   );
 }
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router />
-      <Toaster />
+      <div className="bg-transparent min-h-screen">
+        <Router />
+        <Toaster />
+      </div>
     </QueryClientProvider>
   );
 }
