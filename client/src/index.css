@@ -55,3 +55,13 @@ body, #root {
 .rounded-xl {
   border-radius: 1.75rem !important;
 }
+
+/* Toggle button styles */
+.data-[state=checked]:bg-primary[data-state=checked] {
+  background-color: hsl(0deg 0% 74.94% / 56%) !important;
+}
+
+/* Toggle circle/thumb styles */
+.data-[state=checked]:translate-x-5[data-state=checked] {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
