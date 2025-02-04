@@ -56,12 +56,18 @@ body, #root {
   border-radius: 1.75rem !important;
 }
 
-/* Toggle button styles */
+/* Toggle button styles - checked state */
 .data-\[state\=checked\]\:bg-primary[data-state=checked] {
   background-color: hsl(0deg 0% 74.94% / 56%) !important;
 }
 
-/* Toggle circle/thumb styles */
-.data-\[state\=checked\]\:translate-x-5[data-state=checked] {
+/* Toggle button styles - unchecked state */
+.data-\[state\=unchecked\]\:bg-input[data-state=unchecked] {
+  background-color: #bfbfbf8f !important;
+}
+
+/* Toggle circle/thumb styles - both states */
+.data-\[state\=checked\]\:translate-x-5[data-state=checked],
+.data-\[state\=unchecked\]\:translate-x-0[data-state=unchecked] {
   background-color: rgba(255, 255, 255, 0.5) !important;
 }
