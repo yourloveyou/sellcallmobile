@@ -38,3 +38,12 @@ body, #root {
 .bg-background {
   background: transparent !important;
 }
+
+/* Add these styles */
+.text-card-foreground {
+  color: white !important;
+}
+
+.border {
+  border-width: 0px !important;
+}
