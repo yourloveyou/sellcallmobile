@@ -71,3 +71,17 @@ body, #root {
 .data-\[state\=unchecked\]\:translate-x-0[data-state=unchecked] {
   background-color: rgba(255, 255, 255, 0.5) !important;
 }
+
+/* Dropdown menu styles */
+[role="listbox"],
+.select-content,
+[data-radix-popper-content-wrapper] {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* Dropdown item hover state */
+[role="option"]:hover,
+.select-item:hover {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+}
