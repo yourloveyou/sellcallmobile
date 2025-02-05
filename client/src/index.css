@@ -35,7 +35,7 @@ body, #root {
 }
 
 .bg-background {
-  background: #ffffff !important;
+  background: #fdfdfd !important;
 }
 
 .text-card-foreground {
@@ -97,8 +97,13 @@ body, #root {
   background-color: hsl(24.74deg 89.36% 54.67% / 67%) !important;
 }
 
-/* sub text color */
+/* Gray text color */
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(244 246 249 / 80%) !important;
+}
+
+/* Border color */
+.border-primary {
+  border-color: hsl(0deg 0% 100%) !important;
 }
