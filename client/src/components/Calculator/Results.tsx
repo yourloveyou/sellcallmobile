@@ -140,7 +140,10 @@ export default function Results({ fees, propertyType, existingMortgage }: Result
           </p>
         </div>
 
-        <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white">
+        <Button 
+          className="w-full bg-orange-500 hover:bg-orange-600 text-white mt-6"
+          onClick={() => window.location.href = "/consult"}
+        >
           Consult
         </Button>
       </div>
