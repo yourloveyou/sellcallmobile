@@ -13,8 +13,6 @@ import { useState } from "react";
 import Results from "./Results";
 import Sliders from "./Sliders";
 import { calculateFees } from "@/lib/calculator";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 
 export default function Calculator() {
   const [salePrice, setSalePrice] = useState(600000);
@@ -24,7 +22,6 @@ export default function Calculator() {
   const [brokersFee, setBrokersFee] = useState(4);
   const [attorneyFee, setAttorneyFee] = useState(1500);
   const [flipTax, setFlipTax] = useState(0);
-  const [showResults, setShowResults] = useState(false);
 
   const fees = calculateFees({
     salePrice,
@@ -52,7 +49,7 @@ export default function Calculator() {
 
   return (
     <Card className="w-full max-w-3xl bg-[rgba(17,17,17,0.05)] rounded-xl">
-      <CardContent className="p-6">
+      <CardContent className="grid md:grid-cols-2 gap-6 p-6">
         <div className="space-y-6">
           <div className="space-y-2">
             <Label>Sale Price</Label>
@@ -110,24 +107,13 @@ export default function Calculator() {
             onAttorneyFeeChange={setAttorneyFee}
             onFlipTaxChange={setFlipTax}
           />
-
-          <Button 
-            onClick={() => setShowResults(true)}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white"
-          >
-            Calculate
-          </Button>
         </div>
 
-        <Dialog open={showResults} onOpenChange={setShowResults}>
-          <DialogContent className="max-w-xl p-0 bg-transparent border-0">
-            <Results
-              fees={fees}
-              propertyType={propertyType}
-              existingMortgage={existingMortgage}
-            />
-          </DialogContent>
-        </Dialog>
+        <Results 
+          fees={fees} 
+          propertyType={propertyType} 
+          existingMortgage={existingMortgage} 
+        />
       </CardContent>
     </Card>
   );
